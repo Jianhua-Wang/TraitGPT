@@ -1,7 +1,7 @@
 [tool]
 [tool.poetry]
 name = "traitgpt"
-version = "0.0.8"
+version = "0.0.9"
 homepage = "https://github.com/Jianhua-Wang/traitgpt"
 description = "Mapping trait to ontology using GPT."
 authors = ["Jianhua Wang <jianhua.mert@gmail.com>"]
