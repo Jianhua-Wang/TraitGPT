@@ -12,7 +12,8 @@ CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 app = typer.Typer(context_settings=CONTEXT_SETTINGS, add_completion=False)
 
 console = Console()
-
+logger_httpx = logging.getLogger("httpx")
+logger_httpx.setLevel(logging.WARNING)
 
 @app.callback(invoke_without_command=True, no_args_is_help=True)
 def main(
@@ -59,18 +60,21 @@ def search(
     index_path: str = typer.Option(
         None, "--index-path", "-i", help="Index path to store the vocabulary."
     ),
+    model: str = typer.Option("gpt-3.5-turbo", "--model", "-m", help="OpenAI model."),
+    temperature: float = typer.Option(0.3, "--temperature", "-t", help="Temperature."),
 ):
     """Search the vocabulary."""
     from traitgpt import TraitGPT
 
-    tg = TraitGPT(index_path=index_path)
+    tg = TraitGPT(index_path=index_path, model=model, temperature=temperature)
     out_write = open(outfile, "w")
+    logger = logging.getLogger("TraitGPT")
     with get_openai_callback() as cb:
         with open(infile, "r") as f:
             for line in f:
                 res = tg.map_trait(line.strip())
                 term_name, term_id = res.get("term_name"), res.get("term_id")
-                logging.info(f"{line.strip()} -> {term_name} | {term_id}")
+                logger.info(f"{line.strip()} -> {term_name} | {term_id}")
                 out_write.write(f"{line.strip()}\t{term_name}\t{term_id}\n")
         out_write.close()
         console.print(f"Prompt Tokens: {cb.prompt_tokens}")

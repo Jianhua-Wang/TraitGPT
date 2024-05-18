@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.9] (2024-05-18)
+
+* add timeout to request
+
 ## [0.0.8] (2024-05-18)
 
 * count token

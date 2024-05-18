@@ -31,7 +31,7 @@ class VocabularyStore:
         """Initialize the Vocabulary class."""
         self.logger = logging.getLogger("VocabularyStore")
         set_openai_api_key()
-        self.embeddings = OpenAIEmbeddings()
+        self.embeddings = OpenAIEmbeddings(timeout=30)
         if os.path.exists(f"{index_path}/index.faiss"):
             self.db = FAISS.load_local(
                 index_path, OpenAIEmbeddings(), allow_dangerous_deserialization=True
@@ -48,7 +48,7 @@ class VocabularyStore:
                 self.data = VocabularyStore.index_vocabulary(local_path)
                 self.logger.info("Embedding the vocabulary using OpenAI.")
                 self.db = FAISS.from_documents(
-                    self.data, OpenAIEmbeddings(show_progress_bar=True)
+                    self.data, OpenAIEmbeddings(show_progress_bar=True, timeout=30)
                 )
                 self.logger.info(f"Saving the index to {index_path}")
                 self.db.save_local(index_path)
@@ -92,7 +92,7 @@ class TraitGPT:
         self.logger = logging.getLogger("TraitGPT")
         set_openai_api_key()
         self.vocabulary = VocabularyStore(index_path, file_path)
-        self.chat = ChatOpenAI(model=model, temperature=temperature)
+        self.chat = ChatOpenAI(model=model, temperature=temperature, timeout=30)
 
     def preprocess(self, trait: str) -> str:
         """Preprocess the trait."""
