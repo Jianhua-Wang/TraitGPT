@@ -3,6 +3,7 @@
 import logging
 
 import typer
+from langchain_community.callbacks import get_openai_callback
 from rich.console import Console
 
 from . import __version__
@@ -64,13 +65,18 @@ def search(
 
     tg = TraitGPT(index_path=index_path)
     out_write = open(outfile, "w")
-    with open(infile, "r") as f:
-        for line in f:
-            res = tg.map_trait(line.strip())
-            term_name, term_id = res.get("term_name"), res.get("term_id")
-            logging.info(f"{line.strip()} -> {term_name} | {term_id}")
-            out_write.write(f"{line.strip()}\t{term_name}\t{term_id}\n")
-    out_write.close()
+    with get_openai_callback() as cb:
+        with open(infile, "r") as f:
+            for line in f:
+                res = tg.map_trait(line.strip())
+                term_name, term_id = res.get("term_name"), res.get("term_id")
+                logging.info(f"{line.strip()} -> {term_name} | {term_id}")
+                out_write.write(f"{line.strip()}\t{term_name}\t{term_id}\n")
+        out_write.close()
+        console.print(f"Prompt Tokens: {cb.prompt_tokens}")
+        console.print(f"Completion Tokens: {cb.completion_tokens}")
+        console.print(f"Total Tokens: {cb.total_tokens}")
+        console.print(f"Total Cost (USD): ${cb.total_cost}")
 
 
 if __name__ == "__main__":

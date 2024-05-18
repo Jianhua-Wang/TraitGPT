@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.8] (2024-05-18)
+
+* count token
+
 ## [0.0.7] (2024-05-18)
 
 * fix dependencies
