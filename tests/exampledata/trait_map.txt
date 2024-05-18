@@ -1,0 +1,9 @@
+Male puberty timing (age at voice breaking MTAG)	Puberty, Delayed	D011628
+Diastolic blood pressure	Blood Pressure	D001794
+Systolic blood pressure	Blood Pressure	D001794
+Pulse pressure	Blood Pressure	D001794
+Hypertension	Hypertension	D006973
+Pulse pressure	Blood Pressure	D001794
+Hypertension	Hypertension	D006973
+Diastolic blood pressure	Blood Pressure	D001794
+Systolic blood pressure	Blood Pressure	D001794
