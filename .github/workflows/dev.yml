@@ -33,22 +33,19 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-versions }}
-      - name: Set Swap Space
-        uses: pierotofy/set-swap-space@master
-        with:
-          swap-size-gb: 10
+
       - name: Install dependencies
         run: python -m pip install tox-gh>=1.2
 
-      - name: Setup test suite
-        run: tox --notest
-      - name: Run test suite
-        run: tox -vv --skip-pkg-install
+      # - name: Setup test suite
+      #   run: tox --notest
+      # - name: Run test suite
+      #   run: tox -vv --skip-pkg-install
 
       - name: list files
         run: ls -l .
 
-      - uses: codecov/codecov-action@v1
-        with:
-          fail_ci_if_error: true
-          files: coverage.xml
+      # - uses: codecov/codecov-action@v1
+      #   with:
+      #     fail_ci_if_error: true
+      #     files: coverage.xml

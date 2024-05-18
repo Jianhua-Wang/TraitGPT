@@ -9,23 +9,23 @@ from unittest.mock import MagicMock
 from traitgpt.traitgpt import VocabularyStore, set_openai_api_key
 
 
-# @pytest.fixture
-# def mock_openai_key_env():
-#     with mock.patch.dict(os.environ, {"OPENAI_API_KEY": "test_key"}):
-#         yield
+@pytest.fixture
+def mock_openai_key_env():
+    with mock.patch.dict(os.environ, {"OPENAI_API_KEY": "test_key"}):
+        yield
 
 
-# def test_set_openai_api_key_env(mock_openai_key_env):
-#     set_openai_api_key()
-#     assert os.getenv("OPENAI_API_KEY") == "test_key"
+def test_set_openai_api_key_env(mock_openai_key_env):
+    set_openai_api_key()
+    assert os.getenv("OPENAI_API_KEY") == "test_key"
 
 
-# def test_set_openai_api_key_prompt(monkeypatch):
-#     monkeypatch.setattr("getpass.getpass", lambda _: "test_key_prompt")
-#     if "OPENAI_API_KEY" in os.environ:
-#         del os.environ["OPENAI_API_KEY"]
-#     set_openai_api_key()
-#     assert os.getenv("OPENAI_API_KEY") == "test_key_prompt"
+def test_set_openai_api_key_prompt(monkeypatch):
+    monkeypatch.setattr("getpass.getpass", lambda _: "test_key_prompt")
+    if "OPENAI_API_KEY" in os.environ:
+        del os.environ["OPENAI_API_KEY"]
+    set_openai_api_key()
+    assert os.getenv("OPENAI_API_KEY") == "test_key_prompt"
 
 
 def test_csv_validator():
