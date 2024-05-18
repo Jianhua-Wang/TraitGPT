@@ -37,14 +37,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install poetry tox tox-gh-actions
 
-      # - name: test with tox
-      #   run:
-      #     tox
+      - name: test with tox
+        run:
+          tox
 
       - name: list files
         run: ls -l .
 
-      # - uses: codecov/codecov-action@v1
-      #   with:
-      #     fail_ci_if_error: true
-      #     files: coverage.xml
+      - uses: codecov/codecov-action@v1
+        with:
+          fail_ci_if_error: true
+          files: coverage.xml
