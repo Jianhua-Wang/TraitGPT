@@ -9,7 +9,7 @@ from .traitgpt import TraitGPT, VocabularyStore
 
 __author__ = """Jianhua Wang"""
 __email__ = "jianhua.mert@gmail.com"
-__version__ = "0.0.7"
+__version__ = "0.0.8"
 
 logging.basicConfig(
     level=logging.WARNING,
