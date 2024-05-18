@@ -32,8 +32,7 @@ jobs:
           pip install poetry tox tox-gh-actions
 
       - name: test with tox
-        run:
-          tox
+        run: tox
 
       - name: Build wheels and source tarball
         run: |
