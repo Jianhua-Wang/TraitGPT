@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.10] (2024-09-27)
+
+* add search with score
+
 ## [0.0.9] (2024-05-18)
 
 * add timeout to request

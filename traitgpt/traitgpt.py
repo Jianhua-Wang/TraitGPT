@@ -77,6 +77,18 @@ class VocabularyStore:
         results = self.db.similarity_search(query, k)
         return results
 
+    def search_score(
+        self, query: str, k: int = 5, score_threshold: Optional[float] = None
+    ) -> List[dict]:
+        """Search the vocabulary with score."""
+        search_r = self.db.similarity_search_with_score(query, k)
+        results = []
+        for i, j in search_r:
+            if score_threshold and j > score_threshold:
+                continue
+            results.append({"term": i.page_content, "score": j})
+        return results
+
 
 class TraitGPT:
     """TraitGPT class."""

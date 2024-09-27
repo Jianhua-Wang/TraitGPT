@@ -12,7 +12,7 @@
 Mapping trait to ontology using GPT
 
 
-* Documentation: <https://Jianhua-Wang.github.io/traitgpt>
+* Documentation: <https://Jianhua-Wang.github.io/TraitGPT>
 * GitHub: <https://github.com/Jianhua-Wang/traitgpt>
 * PyPI: <https://pypi.org/project/traitgpt/>
 * Free software: MIT
